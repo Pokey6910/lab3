@@ -2,20 +2,17 @@
 using namespace std;
 
 int main() {
-    int states = 2; 
-    vector <vector <int>> alphabetint = {{1, 2, 3}, {1, 1}, {2, 2}}; 
-    int state = 1; 
-    int final_state = 0; 
-    vector <vector <int>>  transitions = {{0, 0, 1}, {1, 0, 0}};
-    vector<int> list = {1, 2, 3, 2, 2, 1, 1};
-    FiniteStateMachine<int> FiniteStateMachineInt(states, alphabetint, state, final_state, transitions);
-    cout << FiniteStateMachineInt.check_str(list) << endl;
-
-
-    vector <vector <char>> alphabetchar = {{'h', 'e', 'l', 'l', 'o'}, {'a', 'a'}, {'b', 'b'}}; 
-    transitions = {{0, 0, 1}, {1, 0, 0}};
-    vector <char> listchar = {'h', 'e', 'l', 'l', 'o', 'a', 'a', 'b', 'b'};
-    FiniteStateMachine<char> FiniteStateMachineChar(states, alphabetchar, state, final_state, transitions);
-    cout << FiniteStateMachineChar.check_str(listchar) << endl;
-
+    int states = 4; 
+    vector <vector <char>> alphabetint = {{'a'}, {'b'}}; 
+    int state = 2; 
+    vector <int> final_state = {0, 1}; 
+    vector <vector <int>>  transitions = {{3, 1}, {0, 3}, {0, 1}, {3, 3}};
+    vector<char> list1 = {'b', 'b', 'a'};
+    vector<char> list2 = {'a', 'b', 'a', 'a', 'b'};
+    vector<char> list3 = {'b', 'a', 'b', 'a'};
+    
+    FiniteStateMachine<char> FiniteStateMachineChar(states, alphabetint, state, final_state, transitions);
+    cout << FiniteStateMachineChar.check_str(list1) << endl;
+    cout << FiniteStateMachineChar.check_str(list2) << endl;
+    cout << FiniteStateMachineChar.check_str(list3) << endl;
 }
