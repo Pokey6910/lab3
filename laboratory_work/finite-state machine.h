@@ -8,7 +8,7 @@ template  <class Type>
 class FiniteStateMachine {
     public:
         FiniteStateMachine(int states_, std:: vector <std::vector <Type>> alphabet_, int state_, 
-        int final_state_, std::vector <std::vector <int>>  transition_) {
+        std:: vector <int> final_state_, std::vector <std::vector <int>>  transition_) {
             states = states_;
             alphabet = alphabet_;
             state = state_;
@@ -17,6 +17,7 @@ class FiniteStateMachine {
         }
 
         bool check_str(std::vector<Type> str) {
+            int state_now = state;
             std::vector <Type> str_now;
             int ind;
             for (int i = 0; i < str.size(); ++i) {
@@ -24,18 +25,22 @@ class FiniteStateMachine {
                 ind = alphabet_ind(str_now);
                 if (ind >= 0) {
                     str_now.clear();
-                    state = transition[state][ind];
+                    state_now = transition[state_now][ind];
                 }
             }
-            if (state == final_state && str_now.empty()) return 1;
-            else return 0;
+            if (str_now.empty()) {
+                for (auto st : final_state) {
+                    if (st == state_now) return 1;
+                }
+            }
+            return 0;
         }
 
     private:
         int states; 
         std:: vector<std::vector <Type>> alphabet; 
         int state; 
-        int final_state; 
+        std:: vector <int> final_state; 
         std:: vector <std::vector <int>>  transition;
 
         bool equivalent_to(std::vector<Type> a, std::vector<Type> b) {
